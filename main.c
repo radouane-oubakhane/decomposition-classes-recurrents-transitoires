@@ -1,10 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define N 100 // Nombre maximum d'états de la chaîne de Markov
+#define N 100
 
-int n, t[N][N]; // Nombre d'états et matrice de transition
-int recurrent[N], transitive[N]; // Classes récurrentes et transitoires
+int n, t[N][N];
+int recurrent[N], transitive[N];
 
 void rechercheEnProfondeur(int u, int visited[]) {
     int i;
@@ -22,7 +22,7 @@ void decompositionClasses() {
         visited[i] = 0;
     }
 
-    // Trouver les classes récurrentes
+    // les classes récurrentes
     for (i = 0; i < n; i++) {
         if (!visited[i]) {
             rechercheEnProfondeur(i, visited);
@@ -44,7 +44,7 @@ void decompositionClasses() {
         }
     }
 
-    // Trouver les classes transitoires
+    // les classes transitoires
     for (i = 0; i < n; i++) {
         if (!recurrent[i]) {
             rechercheEnProfondeur(i, visited);
@@ -60,11 +60,10 @@ void decompositionClasses() {
 int main() {
     int i, j;
 
-    // Saisir le nombre d'états de la chaîne de Markov
     printf("Veuillez saisire le nombre d'etats : ");
     scanf("%d", &n);
 
-    // Saisir la matrice de transition de la chaîne de Markov
+
     printf("Veuillez saisire la matrice de transition : \n");
     for (i = 0; i < n; i++) {
         for (j = 0; j < n; j++) {
@@ -73,16 +72,15 @@ int main() {
         }
     }
 
-    // Initialiser les classes récurrentes et transitoires à 0
+
     for (i = 0; i < n; i++) {
         recurrent[i] = 0;
         transitive[i] = 0;
     }
 
-    // Décomposer la chaîne de Markov en classes récurrentes et transitoires
     decompositionClasses();
 
-    // Afficher les classes récurrentes et transitoires
+
     printf("Classes recurrentes : { ");
     for (i = 0; i < n; i++) {
         if (recurrent[i]) {
